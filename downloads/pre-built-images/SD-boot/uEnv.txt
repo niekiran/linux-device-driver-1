@@ -1,0 +1,4 @@
+console=ttyS0,115200n8
+bootsettings=setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait earlyprintk mem=512M
+mmcboot=echo Booting from microSD ...; setenv autoload no ; load mmc 0:1 ${loadaddr} uImage ; load mmc 0:1 ${fdtaddr} am335x-boneblack.dtb ; run bootsettings ; bootm ${loadaddr} - ${fdtaddr}
+uenvcmd=run mmcboot

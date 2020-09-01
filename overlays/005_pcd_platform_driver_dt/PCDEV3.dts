@@ -1,0 +1,18 @@
+/dts-v1/;
+/plugin/;
+
+/{
+	fragment@0 {
+		target = <&pcdev1>;
+		__overlay__ {
+			status = "okay";
+			pcdev1-child{
+				compatible = "org,pcdev-child";
+				org,size = <500>;
+			};
+		};
+
+	};
+
+
+};
