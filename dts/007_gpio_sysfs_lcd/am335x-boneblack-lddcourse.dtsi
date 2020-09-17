@@ -1,0 +1,113 @@
+
+/ {
+	pcdev1: pcdev-1 {
+		compatible = "pcdev-E1x","pcdev-A1x";
+		org,size = <512>;
+		org,device-serial-num = "PCDEV1ABC123";
+		org,perm = <0x11>;
+	};
+	
+	pcdev2: pcdev-2 {
+		compatible = "pcdev-B1x";
+		org,size = <1024>;
+		org,device-serial-num = "PCDEV2ABC456";
+		org,perm = <0x11>;
+	};
+
+	pcdev3: pcdev-3 {
+		compatible = "pcdev-C1x";
+		org,size = <256>;
+		org,device-serial-num = "PCDEV3ABC789";
+		org,perm = <0x11>;
+	};
+	
+	pcdev4: pcdev-4 {
+		compatible = "pcdev-D1x";
+		org,size = <2048>;
+		org,device-serial-num = "PCDEV4ABC000";
+		org,perm = <0x11>;
+	};
+
+       bone_gpio_devs {
+	  
+		 compatible = "org,bone-gpio-sysfs";
+		 pinctrl-single,names = "default";
+		 pinctrl-0 = <&p8_gpios>;
+		
+		gpio1 {
+			label = "gpio2.2";
+			bone-gpios = <&gpio2 2 GPIO_ACTIVE_HIGH>;
+				
+		};
+
+		gpio2 {
+			label = "gpio2.7";
+			bone-gpios = <&gpio2 7 GPIO_ACTIVE_HIGH>;
+		};
+		
+
+		gpio3 {
+			label = "gpio2.8";
+			bone-gpios = <&gpio2 8 GPIO_ACTIVE_HIGH>;
+		};
+		
+		
+
+		gpio4 {
+			label = "gpio2.9";
+			bone-gpios = <&gpio2 9 GPIO_ACTIVE_HIGH>;
+		};
+
+		gpio5{
+			label = "gpio2.10";
+			bone-gpios = <&gpio2 10 GPIO_ACTIVE_HIGH>;
+		};
+
+		gpio6{
+			label = "gpio2.11";
+			bone-gpios = <&gpio2 11 GPIO_ACTIVE_HIGH>;
+		};
+
+		gpio7{
+			label = "gpio2.12";
+			bone-gpios = <&gpio2 12 GPIO_ACTIVE_HIGH>;
+		};
+
+		led1 {
+			label = "usrled1:gpio1.22";
+			bone-gpios = <&gpio1 22 GPIO_ACTIVE_HIGH>;
+		};
+
+		led2 {
+			label = "usrled2:gpio1.23";
+			bone-gpios = <&gpio1 23 GPIO_ACTIVE_HIGH>;
+		};
+
+	};//bone_gpio_devs
+
+       
+}; //root node
+
+&tda19988 {
+	status = "disabled";
+};
+
+&am33xx_pinmux {
+	
+	p8_gpios: bone_p8_gpios {
+		pinctrl-single,pins = < 
+					AM33XX_PADCONF(AM335X_PIN_GPMC_ADVN_ALE,PIN_OUTPUT,MUX_MODE7)
+					/* AM33XX_PADCONF(AM335X_PIN_LCD_DATA0,PIN_OUTPUT,MUX_MODE7) */
+					AM33XX_PADCONF(AM335X_PIN_LCD_DATA1,PIN_OUTPUT,MUX_MODE7) 
+					AM33XX_PADCONF(AM335X_PIN_LCD_DATA2,PIN_OUTPUT,MUX_MODE7) 
+					AM33XX_PADCONF(AM335X_PIN_LCD_DATA3,PIN_OUTPUT,MUX_MODE7) 
+					AM33XX_PADCONF(AM335X_PIN_LCD_DATA4,PIN_OUTPUT,MUX_MODE7) 
+					AM33XX_PADCONF(AM335X_PIN_LCD_DATA5,PIN_OUTPUT,MUX_MODE7) 
+					AM33XX_PADCONF(AM335X_PIN_LCD_DATA6,PIN_OUTPUT,MUX_MODE7) 
+		>;
+
+	};
+
+};
+
+
