@@ -84,12 +84,9 @@ ssize_t pcd_read(struct file *filp, char __user *buff, size_t count, loff_t *f_p
 
 	/*copy to user */
 	if(copy_to_user(buff,&device_buffer[*f_pos],count)){
-	mutex_unlock(&pcd_mutex_lock);
+		mutex_unlock(&pcd_mutex_lock);
 		return -EFAULT;
 	}
-	
-	else {
-
 	/*update the current file postion */
 	*f_pos += count;
 
@@ -101,7 +98,6 @@ ssize_t pcd_read(struct file *filp, char __user *buff, size_t count, loff_t *f_p
 	
 	/*Return number of bytes which have been successfully read */
 	return count;
-}
 }
 
 ssize_t pcd_write(struct file *filp, const char __user *buff, size_t count, loff_t *f_pos)
