@@ -123,12 +123,9 @@ ssize_t pcd_write(struct file *filp, const char __user *buff, size_t count, loff
 
 	/*copy from user */
 	if(copy_from_user(&device_buffer[*f_pos],buff,count)){
-	mutex_unlock(&pcd_mutex_lock);
+		mutex_unlock(&pcd_mutex_lock);
 		return -EFAULT;
 	}
-	
-	else {
-
 	/*update the current file postion */
 	*f_pos += count;
 
@@ -140,7 +137,6 @@ ssize_t pcd_write(struct file *filp, const char __user *buff, size_t count, loff
 
 	/*Return number of bytes which have been successfully written */
 	return count;
-}
 }
 
 int pcd_open(struct inode *inode, struct file *filp)
