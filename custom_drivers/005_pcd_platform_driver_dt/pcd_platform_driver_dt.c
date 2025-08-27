@@ -272,19 +272,19 @@ struct pcdev_platform_data* pcdev_get_platdata_from_dt(struct device *dev)
 		return ERR_PTR(-ENOMEM);
 	}
 
-	if(of_property_read_string(dev_node,"org,device-serial-num",&pdata->serial_number) ){
+	if(of_property_read_string(dev_node,"org-device-serial-num",&pdata->serial_number) ){
 		dev_info(dev,"Missing serial number property\n");
 		return ERR_PTR(-EINVAL);
 
 	}
 
 
-	if(of_property_read_u32(dev_node,"org,size",&pdata->size) ){
+	if(of_property_read_u32(dev_node,"org-size",&pdata->size) ){
 		dev_info(dev,"Missing size property\n");
 		return ERR_PTR(-EINVAL);
 	}
 
-	if(of_property_read_u32(dev_node,"org,perm",&pdata->perm) ){
+	if(of_property_read_u32(dev_node,"org-device-permission",&pdata->perm) ){
 		dev_info(dev,"Missing permission property\n");
 		return ERR_PTR(-EINVAL);
 	}
@@ -441,7 +441,7 @@ static int __init pcd_platform_driver_init(void)
 	}
 
 	/*2. Create device class under /sys/class */
-	pcdrv_data.class_pcd = class_create(THIS_MODULE,"pcd_class");
+	pcdrv_data.class_pcd = class_create("pcd_class");
 	if(IS_ERR(pcdrv_data.class_pcd)){
 		pr_err("Class creation failed\n");
 		ret = PTR_ERR(pcdrv_data.class_pcd);
